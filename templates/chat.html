@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-sky-600">
+
+        <nav class="bg-blue-500 text-white p-4 flex justify-between">
+        <ul class="flex">
+            <li class="mr-4"><a href="/" class="hover:underline">Home</a></li>
+            
+            <li><a href="/chat" class="hover:underline">Chat</a></li>
+     {% if logged!="True" %}
+            <li class="mr-4 ml-4"><a href="/login" class="hover:underline">Login</a></li>
+            <li class="mr-4"><a href="/signUp" class="hover:underline">SignUp</a></li>
+
+            {% endif %}
+               {% if logged=="True" %}
+                      <li class="mr-4 ml-4"><a href="/logout" class="hover:underline">logout</a></li>
+             {% endif %}
+        </ul>
+    </nav>
+   
+    <h1 class="underline ml-4 p-4 text-center">My first Gemini App</h1>
+    <div class="query m-9">
+        <form action="/chat" class="bg-slate-100 rounded-md flex flex-wrap justify-between items-center" method="post">
+            <textarea name="prompt" cols="30" class="w-full sm:w-3/5 p-2 border-dotted m-4" placeholder="Enter your prompt for a short answer" required></textarea>
+            <button  type="submit" class="hover:bg-blue-100 border-solid border-2 border-black-700 p-2 m-4">search</button>
+            <button  class="hover:bg-blue-100 border-solid border-2 border-black-700 p-2 m-4" type="reset">Reset</button>
+        </form>
+    </div>
+    <br><br>
+    
+    
+        <div class="bg-slate-400 m-9 p-2 rounded-md" >
+    <h4>Result :</h4>
+   </div>
+        {% if data %}
+    <div class="bg-slate-100 m-9 p-2 rounded-md">
+        
+     
+        <div class="bg-slate-300 p-3 m-1 rounded-md">
+            {{ data }}
+        </div>
+    </div>
+{% else %}
+
+    <div class="bg-slate-100 w-48 m-9 p-1.5 rounded-md">
+       
+        <p class="bg-blue-200 p-3 m-1 rounded-md">Wait for a few seconds...</p>
+    </div>
+{% endif %}
+
+
+
+<br>
+   <div class="bg-slate-400 m-9 p-2 rounded-md" >
+    <h4>Prev Chats:</h4>
+   </div>
+
+        {% if chatHistory %}
+        {% for item in chatHistory %}
+   <div class="bg-slate-100 m-9 p-2 rounded-md">
+     <div class="bg-slate-300 p-3 m-1 rounded-md">
+        <p class="bg-slate-200"><span class="bg-slate-100 p-1 rounded-md">prompt:</span> {{item.question}}</p>
+        <br>
+        <p class="bg-slate-200"><span class="bg-slate-100 p-1 rounded-md">AI Answer:</span> {{item.answer}}</p>
+        <br>
+        <p class="bg-slate-200"><span class="bg-slate-100 p-1 rounded-md">On :</span> {{item.date}}</p>
+        <br>
+        <p class="bg-slate-200">{{item._id}}</p>
+        <form action="/delete/{{item._id}}" method="post">
+            <button class="bg-black text-white rounded m-3 p-2">delete</button>
+        </form>
+     </div>
+    </div>
+            {% endfor %}
+            {% endif %}
+   
+
+
+
+
+
+    <div class="my-24 rounded border-2 border-slate-800 mx-12">
+        <div class="rounded bg-gradient-to-r from-sky-500 to-indigo-500 text-white h-20 flex justify-center font-bold w-full" >
+            News you can trust
+        </div>
+        <div class="text-center mt-6  w-full">
+            <h3 class="font-large font-semibold my-3" >Stay upto date with latest:</h3>
+            <p class="my-3">subscibe our newsletter for the latest new in your inbox</p>
+
+            <form action="" class="flex flex-col ">
+
+                <input type="text" placeholder="your@gmail.com" class=" bg-slate-200  placeholder:text-sm mt-2 p-2 mx-52 rounded">
+                <button class="bg-blue-700 text-white mt-2 py-2 rounded-full mx-52">Subscribe</button>
+                <p class="my-6 text-sm">we value your privacy</p>
+            </form>
+          </div>  
+    </div>
+    
+</body>
+</html>

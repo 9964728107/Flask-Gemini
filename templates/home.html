@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <nav class="bg-blue-500 text-white p-4 flex justify-between">
+        <ul class="flex">
+            <li class="mr-4"><a href="/" class="hover:underline">Home</a></li>
+            
+            <li><a href="/chat" class="hover:underline">Chat</a></li>
+     {% if logged!="True" %}
+            <li class="mr-4 ml-4"><a href="/login" class="hover:underline">Login</a></li>
+            <li class="mr-4"><a href="/signUp" class="hover:underline">SignUp</a></li>
+
+            {% endif %}
+               {% if logged=="True" %}
+                      <li class="mr-4 ml-4"><a href="/logout" class="hover:underline">logout</a></li>
+             {% endif %}
+        </ul>
+    </nav>
+    <div class="hero bg-cover bg-center  text-white text-center py-20" style="background-image: url('/static/aiF2.jpg'); height: 100vh;">
+        <h1 class="text-4xl font-bold mb-16 text-black">Welcome To Our Site</h1>
+        <ul class="list-disc list-inside mt-36 mb-8">
+            {% for item in data %}
+            <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+        <button class="bg-black hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block mb-4"> <a href="/chat">Lets Talk...</a></button>
+        <p class="text-sm">Login <a href="/login" class="text-black hover:underline">here</a></p>
+    </div>
+    <footer class="bg-gray-900 text-white text-center py-4">
+        <p>&copy; 2024 Your Company. All rights reserved.</p>
+    </footer>
+</body>
+</html>
