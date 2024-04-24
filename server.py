@@ -15,8 +15,8 @@ def to_markdown(text):
   text = text.replace('•', '  *')
   return Markdown(textwrap.indent(text, '> ', predicate=lambda _: True))
 
-# Or use `os.getenv('GOOGLE_API_KEY')` to fetch an environment variable.
-GOOGLE_API_KEY="AIzaSyAr6G0NZg0-d75x5LeuoUXpCN1Xu6DcV7A"
+# Add the gemini Api
+GOOGLE_API_KEY=""
 
 genai.configure(api_key=GOOGLE_API_KEY)
 model = genai.GenerativeModel('gemini-pro') 
@@ -24,7 +24,9 @@ model = genai.GenerativeModel('gemini-pro')
 
 # MONGODB
 from bson.objectid import ObjectId
-cluster=MongoClient("")
+# add ur mongoDB url
+MONGO_DB_URL=""
+cluster=MongoClient(MONGO_DB_URL)
 
 db=cluster["test"]
 collection=db["test"]
@@ -53,27 +55,12 @@ class CustomObject:
 @app.route('/test')
 def test():
     res= collection.find({"name":"Sayeem"})
-
-
-    # res=list(res)
-    # for re in res:
-    #      print(re)
-    # print("that was cookie")
     return request.cookies.get('nameD')
 
 @app.get('/login')
 def login_get():
     return render_template('login.html', logged=request.cookies.get('logged'))
 
-# @app.route('/login', methods=['POST'])
-# def login_post():
-#     if request.method == 'POST':
-#         username = request.form['Username']
-#         password = request.form['Password']
-#         print(username, password)
-#         return "done"
-#     else:
-#         return "Invalid request method"
 @app.route('/signUp', methods=['POST'])
 def SignUp():
     
