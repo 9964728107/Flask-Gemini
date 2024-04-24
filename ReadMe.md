@@ -1,8 +1,5 @@
 Project Title - AI chatBot (gemini+flask+mongoDB)
-
-# TEAM MEMBERS:
-   1. M Sayeem Ahmed - NNM22IS083
-   2. Sai Balaji     - NNM22IS083
+      
 
 # OUTPUT: 
   refer *folder output-images*
